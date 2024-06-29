@@ -98,6 +98,9 @@ INFO[0000] Connection established   addr="10.10.14.4:11601"
 https://www.revshells.com/
 https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 
+**Upgrade Shell**
+python -c 'import pty;pty.spawn("/bin/bash")’
+
 **HTTP Server**
 
 
