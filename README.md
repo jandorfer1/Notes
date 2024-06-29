@@ -8,6 +8,7 @@
 cp ~/Files/Tools/threader3000/threader3000.py .
 
 **Nikto**
+nikto -h http://10.10.122.227
 
 **Weak Credentials**
 HTTP Brute Force
