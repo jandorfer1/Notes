@@ -11,6 +11,12 @@ cp ~/Files/Tools/threader3000/threader3000.py .
 nikto -h http://10.10.122.227
 
 **Weak Credentials**
+
+kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1
+
+##Validating the Credentials with CrackMapExec
+sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123
+
 HTTP Brute Force
 
 wfuzz POST
