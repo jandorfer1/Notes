@@ -1,3 +1,32 @@
+#### 1. Port Scanning
+`ping <IP> -c1`
+`ttl=64` Linux
+`ttl=128`  Windows
+
+**Full TCP Scan**
+`nmap -p- -T4 <target>`
+
+**Nmap Aggressive Scan**
+`nmap -sC -sV -A -p<ports_from_prior_scan> -oA nmap/initial_scan <target>`
+
+**Top 1000 Ports Scan**
+`nmap -sC -sV <target>`
+
+**UDP Scan**
+`sudo nmap -sU -p- <target>`
+
+#### 2. Service Enumeration
+
+**Version Detection**
+`nmap -sV <target>`
+
+**Service Detection**
+`nmap -sV -sC <target>`
+
+**Banner Grabbing**
+nc -nv <target> <port> 
+telnet <target> <port>
+
 **NMAP**
   nmap sweep scan 
   - nmap -sP 10.10.155.1-225
